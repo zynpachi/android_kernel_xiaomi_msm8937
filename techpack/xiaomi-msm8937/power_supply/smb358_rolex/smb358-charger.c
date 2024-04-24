@@ -1207,13 +1207,13 @@ static int smb358_get_prop_batt_status(struct smb358_charger *chip)
 
 	pr_debug("%s: STATUS_C_REG=%x\n", __func__, reg);
 
-		if ((chip->batt_full))
+	if ((chip->batt_full))
 		return POWER_SUPPLY_STATUS_FULL;
 
 	if ((reg & STATUS_C_CHARGING_MASK) &&
 			!(reg & STATUS_C_CHG_ERR_STATUS_BIT))
 		return POWER_SUPPLY_STATUS_CHARGING;
-		if ((reg & STATUS_C_CHG_HOLD_OFF_BIT) || !chip->power_ok)
+	if ((reg & STATUS_C_CHG_HOLD_OFF_BIT) && chip->power_ok)
 		return POWER_SUPPLY_STATUS_NOT_CHARGING;
 
 	return POWER_SUPPLY_STATUS_DISCHARGING;
@@ -1782,10 +1782,10 @@ static int smb358_battery_get_property(struct power_supply *psy,
 		val->intval = chip->therm_lvl_sel;
 		break;
 	case POWER_SUPPLY_PROP_CHARGE_FULL_DESIGN:
-		val->intval = chip->fcc_mah;
+		val->intval = chip->fcc_mah * 1000;
 		break;
 	case POWER_SUPPLY_PROP_CHARGE_FULL:
-		val->intval = chip->fcc_mah;
+		val->intval = chip->fcc_mah * 1000;
 		break;
 	default:
 		return -EINVAL;
