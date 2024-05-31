@@ -3808,7 +3808,7 @@ static struct i2c_driver fts_ts_i2c_driver = {
 	.id_table = fts_ts_i2c_id,
 };
 
-static int __init fts_ts_i2c_init(void)
+static int fts_ts_i2c_init(void)
 {
 	int ret = 0;
 
@@ -3906,7 +3906,7 @@ static struct spi_driver fts_ts_spi_driver = {
 	.id_table = fts_ts_spi_id,
 };
 
-static int __init fts_ts_spi_init(void)
+static int fts_ts_spi_init(void)
 {
 	int ret = 0;
 
