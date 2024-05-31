@@ -2724,7 +2724,7 @@ static int vkey_calculate(struct device *dev,
 			struct fts_ts_platform_data *fts_pdata)
 {
 	int border, width, height;
-	int x1 = 0, x2 = 0, i, ret;
+	int x1 = 0, x2 = 0, i;
 
 #define BORDER_ADJUST_NUM 3
 #define BORDER_ADJUST_DENOM 4
