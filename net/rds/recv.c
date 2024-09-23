@@ -479,7 +479,7 @@ int rds_recvmsg(struct kiocb *iocb, struct socket *sock, struct msghdr *msg,
 
 		if (rds_cmsg_recv(inc, msg)) {
 			ret = -EFAULT;
-			goto out;
+			break;
 		}
 
 		rds_stats_inc(s_recv_delivered);
@@ -547,6 +547,8 @@ void rds_inc_info_copy(struct rds_incoming *inc,
 		minfo.lport = inc->i_hdr.h_sport;
 		minfo.fport = inc->i_hdr.h_dport;
 	}
+
+	minfo.flags = 0;
 
 	rds_info_copy(iter, &minfo, sizeof(minfo));
 }
